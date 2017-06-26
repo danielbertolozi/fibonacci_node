@@ -1,0 +1,7 @@
+var app = require("./api/config/config-express.js");
+
+var port = process.env.PORT || 9090;
+
+app.listen(port, function () {
+	console.log("API listening @ http://localhost:9090/");	
+});
