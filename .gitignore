@@ -1,0 +1,14 @@
+# Grunt stuff
+.grunt
+
+# Logs
+*.log
+logs
+npm-debug.log*
+
+# NPM
+node_modules/
+.npm
+
+# ESLint Cache
+.eslintcache
