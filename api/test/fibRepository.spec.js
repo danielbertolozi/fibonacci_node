@@ -3,7 +3,7 @@ const fibRepository = require("../repository/fibRepository")();
 const expect = require("chai").expect;
 const oFib = new fibRepository();
 
-describe("The Fibonacci Repository", function () {
+describe("Fibonacci Repository", function () {
 	it ("should return 1 for entry value 1", function () {
 		const iResult = oFib.fibonacci(1);
 		assert.equal(iResult, 1);
