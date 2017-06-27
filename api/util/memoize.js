@@ -19,6 +19,7 @@ memoize.prototype.call = function (oFunction, iArgs) {
 		oFunctionMemo = this.oMemo[sFunctionName];
 		if (oFunctionMemo[iArgs]) {
 			fnResolve(oFunctionMemo[iArgs]);
+			return;
 		}
 		oFunctionMemo[iArgs] = oFunction.apply(this, [iArgs]);
 		fnResolve(oFunctionMemo[iArgs]);
