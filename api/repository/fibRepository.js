@@ -6,7 +6,7 @@ function _fibonacci (iValue) {
 	return _fibonacci(iValue - 1) + _fibonacci(iValue - 2);
 }
 
-fibRepository.prototype.fibonacci = function (iValue) {
+fibRepository.prototype.fibonacci = function fibonacci (iValue) {
 	return _fibonacci(iValue);
 };
 

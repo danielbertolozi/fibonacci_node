@@ -10,6 +10,7 @@ module.exports = function () {
 	consign()
 		.include("./api/controllers")
 		.then("./api/repository")
+		.then("./api/util")
 		.into(app);
 
 	return app;
