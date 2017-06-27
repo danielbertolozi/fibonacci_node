@@ -1,10 +1,10 @@
 module.exports = function (app) {
-
 	app.param("id", function (oRequest, oResponse, fnNext, iValue) {
 		try {
 			iValue = Number(iValue);
 		} catch (e) {
-			oResponse.status(400).json("Error value");
+			oResponse.status(400).json("Invalid Value");
+			throw new Error("Invalid value.");
 		}
 		oRequest.iValue = iValue;
 		fnNext();
