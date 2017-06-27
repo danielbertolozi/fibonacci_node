@@ -7,11 +7,13 @@ module.exports = function () {
 
 	app.use(bodyParser.json());
 
-	consign()
-		.include("./api/controllers")
-		.then("./api/repository")
-		.then("./api/util")
-		.into(app);
+	consign({
+		ignore: [/.+spec.js/]	
+	})
+	.include("./api/controllers")
+	.then("./api/repository")
+	.then("./api/util")
+	.into(app);
 
 	return app;
 }
