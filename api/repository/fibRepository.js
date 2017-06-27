@@ -1,6 +1,9 @@
 function fibRepository () {}
 
 function _fibonacci (iValue) {
+	if (iValue === 0) {
+		return 0;
+	}
 	if (iValue === 1 || iValue === 2)
 		return 1;
 	return _fibonacci(iValue - 1) + _fibonacci(iValue - 2);
