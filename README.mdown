@@ -1,0 +1,13 @@
+API made with Node that returns the Fibonacci number of some given value.
+
+Usage:
+
+```
+npm install
+npm run start
+http://localhost:9090/fib/{}
+```
+
+Where {} is the desired number.
+
+You can also run `npm test` to trigger the Unit Tests.
