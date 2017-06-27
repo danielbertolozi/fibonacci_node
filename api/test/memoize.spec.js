@@ -3,14 +3,18 @@ const memoize = require("../util/memoize")();
 const expect = require("chai").expect;
 
 describe("Memoize", function () {
+
+	beforeEach(function () {
+		this.oMemoize = new memoize();
+	});
+
 	it ("should keep new function results", function () {
-		var oMemoize = new memoize();
-		var fnTestFunction = function testFunction (iValue) {
+		var fnTestFunction = function (iValue) {
 			return 60 + iValue;
 		};
-		oMemoize.call(fnTestFunction, 4).then(function (iResult) {
-			oMemoize.oMemo.should.have.property("testFunction", iValue);
-			oMemoize.oMemo.testFunction.should.have.property(iValue, iResult);
+		this.oMemoize.call(fnTestFunction, 4).then(function (iResult) {
+			this.oMemoize.oMemo.should.have.property("testFunction", iValue);
+			this.oMemoize.oMemo.testFunction.should.have.property(iValue, iResult);
 		})
 		.catch(function (oError) {
 			if (oError instanceof Error) {
@@ -20,30 +24,31 @@ describe("Memoize", function () {
 		});
 	});
 
-	it ("should error if function is anonymous", function (fnDone) {
-		var oMemoize = new memoize();
+	it ("should not memo if no parameters were given", function (fnDone) {
 		var fnTestFunction = function (iValue) {
 			return 60 + iValue;
 		};
-		oMemoize.call(fnTestFunction, 4).then(function (iResult) {
-			throw new error("it should not have success if the given function is anonymous");
+		this.oMemoize.call(fnTestFunction, undefined).then(function (iResult) {
+			throw new error("it should not have success if no arguments are provided.");
+			fnDone();
 		})
 		.catch(function (oError) {
-			assert.equal(oError.message, "Memoize can't be executed because the target function is anonymous.");
+			assert.equal(oError, "Memoize can't be executed because no arguments were provided.");
 			fnDone();
 		});
 	});
 
-	it ("should not memo if no parameters were given", function (fnDone) {
-		var oMemoize = new memoize();
-		var fnTestFunction = function (iValue) {
+	it ("should error if function is anonymous", function (fnDone) {
+		var oTestObject = {};
+		oTestObject.fnTestFunction = function (iValue) {
 			return 60 + iValue;
-		}
-		oMemoize.call(fnTestFunction).then(function (iResult) {
-			throw new error("it should not have success if no arguments are provided.");
+		};
+		this.oMemoize.call(oTestObject.fnTestFunction, 4).then(function (iResult) {
+			throw new error("it should not have success if the given function is anonymous");
+			fnDone();
 		})
 		.catch(function (oError) {
-			assert.equal(oError.message, "Memoize can't be executed because no arguments were provided.");
+			assert.equal(oError, "Memoize can't be executed because the target function is anonymous.");
 			fnDone();
 		});
 	});
