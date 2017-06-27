@@ -1,16 +1,20 @@
 function memoize () {}
 
-memoize.oMemo = {};
+memoize.prototype.oMemo = {};
 
 memoize.prototype.call = function (oFunction, iArgs) {
 	if (!oFunction.name) {
 		throw new Error("Memoize can't be executed because the target function is anonymous.");
 	}
-	var oFunctionMemo = this.oMemo[oFunction.name];
-	if (oFunctionMemo[oValue]) {
-		return oFunctionMemo[oValue];
+	var oFunctionMemo;
+	if (!this.oMemo[oFunction.name]) {
+		this.oMemo[oFunction.name] = {};
 	}
-	return oFunctionMemo[oValue] = oFunction.apply(this, oValue);
+	oFunctionMemo = this.oMemo[oFunction.name];
+	if (oFunctionMemo[iArgs]) {
+		return oFunctionMemo[iArgs];
+	}
+	return oFunctionMemo[iArgs] = oFunction.apply(this, [iArgs]);
 }
 
 module.exports = function () {

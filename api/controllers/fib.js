@@ -1,9 +1,9 @@
 module.exports = function (app) {
-	var oMemoize = new app.api.util.memoize();
-	var oRepository = new app.api.repository.fibRepository();
 
 	app.param("id", function (oRequest, oResponse, fnNext, iValue) {
-		if (!Number.isInteger(iValue)) {
+		try {
+			iValue = Number(iValue);
+		} catch (e) {
 			oResponse.status(400).json("Error value");
 		}
 		oRequest.iValue = iValue;
@@ -11,8 +11,12 @@ module.exports = function (app) {
 	});
 	
 	app.get("/fib/:id", function (oRequest, oResponse) {
+		var oRepository = new app.api.repository.fibRepository();
+		var oMemoize = new app.api.util.memoize();
+
 		var iValue = oRequest.iValue;
 		var sResult = oMemoize.call(oRepository.fibonacci, iValue);
-		oResponse.status(200).json("success");
+
+		oResponse.status(200).json(sResult);
 	});
-}
+};
