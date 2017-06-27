@@ -7,6 +7,8 @@ memoize.prototype.call = function (oFunction, iArgs) {
 		var sFunctionName = oFunction.name;
 		if (!sFunctionName) {
 			fnReject("Memoize can't be executed because the target function is anonymous.");
+		} else if (iArgs === undefined) {
+			fnReject("Memoize can't be executed because no arguments were provided.");
 		}
 		var oFunctionMemo;
 		if (!this.oMemo[sFunctionName]) {
