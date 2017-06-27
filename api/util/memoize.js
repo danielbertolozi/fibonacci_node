@@ -1,3 +1,5 @@
+const constants = require("./constants")();
+
 function memoize () {}
 
 memoize.prototype.oMemo = {};
@@ -6,9 +8,9 @@ memoize.prototype.call = function (oFunction, iArgs) {
 	return new Promise(function (fnResolve, fnReject) {
 		var sFunctionName = oFunction.name;
 		if (!sFunctionName) {
-			fnReject("Memoize can't be executed because the target function is anonymous.");
+			fnReject(constants.memoize.errorAnonymous);
 		} else if (iArgs === undefined) {
-			fnReject("Memoize can't be executed because no arguments were provided.");
+			fnReject(constants.memoize.errorArguments);
 		}
 		var oFunctionMemo;
 		if (!this.oMemo[sFunctionName]) {

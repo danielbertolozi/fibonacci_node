@@ -1,4 +1,5 @@
 const assert = require("assert");
+const constants = require("../util/constants")();
 const memoize = require("../util/memoize")();
 const expect = require("chai").expect;
 
@@ -33,7 +34,7 @@ describe("Memoize", function () {
 			fnDone();
 		})
 		.catch(function (oError) {
-			assert.equal(oError, "Memoize can't be executed because no arguments were provided.");
+			assert.equal(oError, constants.memoize.errorArguments);
 			fnDone();
 		});
 	});
@@ -48,7 +49,7 @@ describe("Memoize", function () {
 			fnDone();
 		})
 		.catch(function (oError) {
-			assert.equal(oError, "Memoize can't be executed because the target function is anonymous.");
+			assert.equal(oError, constants.memoize.errorAnonymous);
 			fnDone();
 		});
 	});

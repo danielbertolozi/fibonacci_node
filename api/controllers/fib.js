@@ -1,10 +1,12 @@
+const constants = require("../util/constants")();
+
 module.exports = function (app) {
 	app.param("id", function (oRequest, oResponse, fnNext, iValue) {
 		try {
 			iValue = Number(iValue);
 		} catch (e) {
-			oResponse.status(400).json("Invalid Value");
-			throw new Error("Invalid value.");
+			oResponse.status(400).json(constants.fib.errorInvalidValue);
+			throw new Error(constants.fib.errorInvalidValue);
 		}
 		oRequest.iValue = iValue;
 		fnNext();
@@ -19,7 +21,7 @@ module.exports = function (app) {
 			oResponse.status(200).json(sResult);
 		})
 		.catch(function (oError) {
-			oResponse.status(500).json("Internal Server Error");
+			oResponse.status(500).json(constants.fib.errorInternalError);
 			if (oError instanceof Error) {
 				throw oError;
 			} else {
