@@ -15,8 +15,16 @@ module.exports = function (app) {
 		var oMemoize = new app.api.util.memoize();
 
 		var iValue = oRequest.iValue;
-		var sResult = oMemoize.call(oRepository.fibonacci, iValue);
-
-		oResponse.status(200).json(sResult);
+		oMemoize.call(oRepository.fibonacci, iValue).then(function (sResult) {
+			oResponse.status(200).json(sResult);
+		})
+		.catch(function (oError) {
+			oResponse.status(500).json("Internal Server Error");
+			if (oError instanceof Error) {
+				throw oError;
+			} else {
+				throw new Error(oError);
+			}
+		});
 	});
 };
