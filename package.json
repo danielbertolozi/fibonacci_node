@@ -1,5 +1,5 @@
 {
-  "name": "Fibonacci Node",
+  "name": "fibonacci_node",
   "version": "1.0.0",
   "description": "Node.JS Api that returns the Fibonacci value of a number",
   "main": "index.js",
