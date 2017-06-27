@@ -1,13 +1,13 @@
 {
-  "name": "cd",
+  "name": "Fibonacci Node",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.JS Api that returns the Fibonacci value of a number",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "mocha api/test/*.js"
   },
-  "author": "",
+  "author": "Daniel Bertolozi",
   "license": "ISC",
   "devDependencies": {
     "assert": "^1.4.1",
@@ -17,7 +17,6 @@
     "express": "^4.15.3",
     "mocha": "^3.4.2",
     "should": "^11.2.1",
-    "sinon": "^2.3.5",
     "supertest": "^3.0.0"
   }
 }

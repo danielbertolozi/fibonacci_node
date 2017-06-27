@@ -16,8 +16,9 @@ describe("Fibonacci Controller", function () {
 				}
 				oResponse.should.have.property("status", 500);
 				fnDone();
-			});
+		});
 	});
+
 	it("should return the correct output (Value used: 9 => 34)", function (fnDone) {
 		const iValue = 9;
 		const sUrl = "http://localhost:9090";
@@ -31,6 +32,6 @@ describe("Fibonacci Controller", function () {
 				}
 				oResponse.body.should.equal(34);
 				fnDone();
-			});
+		});
 	});
 });
